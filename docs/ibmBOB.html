@@ -1,0 +1,757 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SupplyChain Sentinel | AI Logistics Control Tower</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f4f7fb;
+    color: #172b4d;
+}
+
+header {
+    background: #0b1f3a;
+    color: white;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: .5px;
+}
+
+.logo span {
+    color: #43d5df;
+}
+
+nav a {
+    color: #d9e6f5;
+    text-decoration: none;
+    margin-left: 28px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #43d5df;
+}
+
+.hero {
+    background: linear-gradient(120deg, #0b1f3a, #123e68);
+    color: white;
+    padding: 75px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.badge {
+    display: inline-block;
+    background: rgba(67,213,223,.15);
+    border: 1px solid #43d5df;
+    color: #7beaf0;
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-size: 12px;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    line-height: 1.12;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #43d5df;
+}
+
+.hero p {
+    color: #c7d8eb;
+    line-height: 1.8;
+    font-size: 16px;
+    margin-bottom: 28px;
+}
+
+.btn {
+    display: inline-block;
+    background: #43d5df;
+    color: #06203b;
+    padding: 14px 23px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 700;
+    margin-right: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+.btn.secondary {
+    background: transparent;
+    color: white;
+    border: 1px solid #7897b8;
+}
+
+.hero-card {
+    width: 390px;
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 15px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+}
+
+.hero-card h3 {
+    margin-bottom: 20px;
+}
+
+.signal {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    font-size: 13px;
+}
+
+.signal:last-child {
+    border: none;
+}
+
+.status {
+    color: #57e389;
+}
+
+.warning {
+    color: #ffbd59;
+}
+
+.danger {
+    color: #ff7373;
+}
+
+section {
+    padding: 65px 7%;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 38px;
+}
+
+.section-heading h2 {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.section-heading p {
+    color: #64748b;
+}
+
+.dashboard {
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 8px 35px rgba(18, 49, 86, .08);
+}
+
+.dashboard-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.dashboard-top h2 {
+    font-size: 21px;
+}
+
+.live {
+    color: #159957;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.metric {
+    padding: 20px;
+    border-radius: 12px;
+    background: #f5f8fc;
+    border-left: 4px solid #2878c8;
+}
+
+.metric h4 {
+    color: #64748b;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.metric strong {
+    font-size: 27px;
+}
+
+.metric small {
+    display: block;
+    margin-top: 7px;
+    color: #159957;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 22px;
+}
+
+.panel {
+    border: 1px solid #e4eaf2;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.panel h3 {
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+.alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #edf1f5;
+}
+
+.alert:last-child {
+    border: none;
+}
+
+.alert-info {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.alert-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff0f0;
+    color: #d64545;
+}
+
+.alert-title {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.alert-sub {
+    font-size: 11px;
+    color: #77869a;
+    margin-top: 4px;
+}
+
+.tag {
+    padding: 6px 9px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.tag.red {
+    background: #ffe4e4;
+    color: #c83232;
+}
+
+.tag.yellow {
+    background: #fff2d7;
+    color: #a56b00;
+}
+
+.tag.green {
+    background: #dcf8e7;
+    color: #16834b;
+}
+
+.bar {
+    margin-bottom: 18px;
+}
+
+.bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+.progress {
+    height: 9px;
+    background: #e8eef5;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress div {
+    height: 100%;
+    border-radius: 10px;
+    background: #2878c8;
+}
+
+.progress.green div {
+    background: #25a96b;
+}
+
+.progress.orange div {
+    background: #e7a33b;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.feature {
+    background: white;
+    padding: 28px;
+    border-radius: 14px;
+    border: 1px solid #e5ebf2;
+    transition: .3s;
+}
+
+.feature:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(30,70,110,.12);
+}
+
+.feature-icon {
+    font-size: 30px;
+    margin-bottom: 17px;
+}
+
+.feature h3 {
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.feature p {
+    color: #68798e;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.ai-section {
+    background: #0b1f3a;
+    color: white;
+}
+
+.ai-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.ai-section h2 {
+    font-size: 33px;
+    margin-bottom: 20px;
+}
+
+.ai-section p {
+    color: #c6d6e8;
+    line-height: 1.8;
+}
+
+.ai-box {
+    background: #122f52;
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid #31577f;
+}
+
+.ai-message {
+    padding: 17px;
+    background: #193c64;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.ai-message strong {
+    color: #62e1e8;
+}
+
+.ai-action {
+    padding: 14px;
+    background: #173653;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #a9c8e6;
+}
+
+.cta {
+    text-align: center;
+    background: #eaf5fb;
+    padding: 65px 7%;
+}
+
+.cta h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.cta p {
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+footer {
+    background: #07172b;
+    color: #9fb5cd;
+    padding: 25px 7%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+@media(max-width: 900px) {
+    .hero {
+        flex-direction: column;
+    }
+
+    .hero-card {
+        width: 100%;
+    }
+
+    .metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid,
+    .ai-content {
+        grid-template-columns: 1fr;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SupplyChain <span>Sentinel</span></div>
+    <nav>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#features">Capabilities</a>
+        <a href="#ai">AI Assistant</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="badge">AI-POWERED LOGISTICS CONTROL TOWER</div>
+        <h1>Predict Disruptions.<br><span>Optimize Every Move.</span></h1>
+        <p>
+            SupplyChain Sentinel combines AI, IoT and optimization to identify
+            affected shipments, recommend intelligent rerouting, maximize fleet
+            utilization and protect temperature-sensitive cargo before losses occur.
+        </p>
+        <a href="#dashboard" class="btn">Explore Control Tower</a>
+        <a href="#ai" class="btn secondary">View AI Insights</a>
+    </div>
+
+    <div class="hero-card">
+        <h3>Live Network Intelligence</h3>
+        <div class="signal">
+            <span>🌦 Weather Disruption</span>
+            <span class="warning">Monitoring</span>
+        </div>
+        <div class="signal">
+            <span>🚢 Port Strike Exposure</span>
+            <span class="danger">43 Shipments</span>
+        </div>
+        <div class="signal">
+            <span>🚛 Fleet Availability</span>
+            <span class="status">87% Optimized</span>
+        </div>
+        <div class="signal">
+            <span>❄️ Cold Chain Health</span>
+            <span class="status">Stable</span>
+        </div>
+    </div>
+</section>
+
+<section id="dashboard">
+    <div class="section-heading">
+        <h2>Real-Time Supply Chain Control Tower</h2>
+        <p>One intelligent view of shipments, disruptions, fleet and cargo health.</p>
+    </div>
+
+    <div class="dashboard">
+        <div class="dashboard-top">
+            <h2>Network Overview</h2>
+            <span class="live">● LIVE MONITORING</span>
+        </div>
+
+        <div class="metrics">
+            <div class="metric">
+                <h4>ACTIVE SHIPMENTS</h4>
+                <strong>1,284</strong>
+                <small>↑ 12% monitored</small>
+            </div>
+            <div class="metric">
+                <h4>AT-RISK SHIPMENTS</h4>
+                <strong>43</strong>
+                <small style="color:#d64545">Requires attention</small>
+            </div>
+            <div class="metric">
+                <h4>FLEET UTILIZATION</h4>
+                <strong>87%</strong>
+                <small>↑ 8.4% optimized</small>
+            </div>
+            <div class="metric">
+                <h4>CARGO VALUE PROTECTED</h4>
+                <strong>$4.2M</strong>
+                <small>Potential exposure avoided</small>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="panel">
+                <h3>Active Disruption Alerts</h3>
+
+                <div class="alert">
+                    <div class="alert-info">
+                        <div class="alert-icon">⚓</div>
+                        <div>
+                            <div class="alert-title">Port X Labor Strike</div>
+                            <div class="alert-sub">43 shipments affected · 9 high priority</div>
+                        </div>
+                    </div>
+                    <span class="tag red">CRITICAL</span>
+                </div>
+
+                <div class="alert">
+                    <div class="alert-info">
+                        <div class="alert-icon">🌧</div>
+                        <div>
+                            <div class="alert-title">Severe Weather Corridor</div>
+                            <div class="alert-sub">18 routes delayed · ETA risk detected</div>
+                        </div>
+                    </div>
+                    <span class="tag yellow">WARNING</span>
+                </div>
+
+                <div class="alert">
+                    <div class="alert-info">
+                        <div class="alert-icon">🌡</div>
+                        <div>
+                            <div class="alert-title">Cold Chain Excursion</div>
+                            <div class="alert-sub">Shipment CS-2048 · 8.9°C for 17 min</div>
+                        </div>
+                    </div>
+                    <span class="tag red">QUALITY RISK</span>
+                </div>
+
+                <div class="alert">
+                    <div class="alert-info">
+                        <div class="alert-icon">🛣</div>
+                        <div>
+                            <div class="alert-title">Route Congestion</div>
+                            <div class="alert-sub">North corridor · Alternate route available</div>
+                        </div>
+                    </div>
+                    <span class="tag green">MANAGED</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>Fleet Utilization by Region</h3>
+
+                <div class="bar">
+                    <div class="bar-label"><span>West Region</span><b>92%</b></div>
+                    <div class="progress green"><div style="width:92%"></div></div>
+                </div>
+
+                <div class="bar">
+                    <div class="bar-label"><span>Central Region</span><b>76%</b></div>
+                    <div class="progress"><div style="width:76%"></div></div>
+                </div>
+
+                <div class="bar">
+                    <div class="bar-label"><span>East Region</span><b>64%</b></div>
+                    <div class="progress orange"><div style="width:64%"></div></div>
+                </div>
+
+                <div class="bar">
+                    <div class="bar-label"><span>South Region</span><b>88%</b></div>
+                    <div class="progress green"><div style="width:88%"></div></div>
+                </div>
+
+                <div style="margin-top:25px; padding:15px; background:#eef7ff; border-radius:8px; font-size:12px; color:#28659b;">
+                    💡 AI Recommendation: Redeploy 7 idle assets from East to Central Region.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="features">
+    <div class="section-heading">
+        <h2>Intelligent Capabilities</h2>
+        <p>Designed to make supply chains resilient, proactive and efficient.</p>
+    </div>
+
+    <div class="features">
+        <div class="feature">
+            <div class="feature-icon">🌍</div>
+            <h3>Disruption Impact Mapping</h3>
+            <p>
+                Automatically maps weather events, port strikes and geopolitical
+                disruptions to every affected shipment, route and customer SLA.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🚛</div>
+            <h3>Fleet Redeployment</h3>
+            <p>
+                Identifies idle assets and recommends redeployment to overloaded
+                lanes while considering cost, availability and operational constraints.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">❄️</div>
+            <h3>Cold Chain Guardian</h3>
+            <p>
+                Monitors IoT sensor logs, detects temperature excursions early and
+                classifies quality and regulatory severity before delivery.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🤖</div>
+            <h3>AI Recommendations</h3>
+            <p>
+                Generates explainable rerouting, alternate carrier and intervention
+                recommendations with cost and ETA trade-offs.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">📊</div>
+            <h3>Predictive Risk Scoring</h3>
+            <p>
+                Prioritizes shipments using cargo value, urgency, disruption severity,
+                SLA exposure and regulatory risk.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🔐</div>
+            <h3>Human-in-the-Loop Governance</h3>
+            <p>
+                Maintains audit trails, confidence scores and approval workflows for
+                high-value and regulated logistics decisions.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="ai-section" id="ai">
+    <div class="ai-content">
+        <div>
+            <h2>Your AI Logistics Decision Assistant</h2>
+            <p>
+                Ask questions in natural language and receive actionable,
+                explainable answers from your entire logistics network.
+                SupplyChain Sentinel transforms fragmented operational data
+                into coordinated decisions.
+            </p>
+            <br>
+            <a href="#dashboard" class="btn">Open AI Control Center</a>
+        </div>
+
+        <div class="ai-box">
+            <div class="ai-message">
+                <strong>Operations Manager:</strong><br>
+                What shipments are affected by the Port X strike and what should we do?
+            </div>
+
+            <div class="ai-message">
+                <strong>SupplyChain Sentinel AI:</strong><br>
+                43 shipments are affected. 9 are critical due to SLA exposure.
+                I recommend rerouting 5 high-value shipments through Port Y,
+                reserving Carrier B capacity and redeploying 4 refrigerated trailers.
+            </div>
+
+            <div class="ai-action">
+                ✓ $4.2M potential exposure identified<br>
+                ✓ 5 rerouting options generated<br>
+                ✓ 7 idle assets available for recovery
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta" id="contact">
+    <h2>Build a Supply Chain That Thinks Ahead</h2>
+    <p>Move from reactive tracking to proactive, AI-powered resilience.</p>
+    <button class="btn" onclick="showMessage()">Request Innovation Demo</button>
+</section>
+
+<footer>
+    <div>© 2026 SupplyChain Sentinel</div>
+    <div>AI + IoT + Optimization + Intelligent Orchestration</div>
+</footer>
+
+<script>
+function showMessage() {
+    alert("Demo request received! SupplyChain Sentinel AI team will connect with you.");
+}
+</script>
+
+</body>
+</html>
+```
