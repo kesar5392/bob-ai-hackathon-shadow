@@ -10,7 +10,7 @@
 
 team:
   name: "Shadow"                             # REQUIRED — e.g., "Orion Squad"
-  track: "supply-chain"                            # REQUIRED — one of: AI | DevOps | Sustainability | Open
+  track: "AI"                            # REQUIRED — one of: AI | DevOps | Sustainability | Open
   lead: ""
     name: "Keya Dobaria"                           # REQUIRED — e.g., "Alice Chen"
     email: "26CE023@charusat.edu.in"                          # REQUIRED — e.g., "alice.chen@ibm.com"
